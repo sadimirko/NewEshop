@@ -1,5 +1,4 @@
 package Controler;
-import java.sql.*;
 import java.util.Scanner;
 
 import Beens.User;
@@ -9,10 +8,7 @@ public class UserControler {
 	private static final Scanner sc = new Scanner(System.in);
 	private  UsersDao zoznamUzivatelov = new UsersDao();
 	
-	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	static final String DB_URL = "jdbc:mysql://localhost/eshop";
-	static final String USER = "root";
-	static final String PASS = "";
+	
 	
 	public void inic(){
 		zoznamUzivatelov.pridajUzivatela(new User(1, "admin", "admin", true, "admin", "pass"));

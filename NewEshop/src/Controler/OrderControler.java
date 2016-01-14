@@ -26,7 +26,7 @@ public class OrderControler {
 			System.out.println("chces pridat dalsi  ak nie stlac 0");
 			znak = sc.nextInt();
 		}
-		Order nova = new Order(zoznamObjednavok.sizeOrders()+1, objednane, false, loged);
+		Order nova = new Order(zoznamObjednavok.sizeOrders()+1, objednane, loged, false);
 		zoznamObjednavok.pridajObjednavku(nova);
 	}
 	public String  listOrders(){
