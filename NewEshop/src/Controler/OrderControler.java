@@ -9,6 +9,15 @@ public class OrderControler {
 	//private  ProductsDao zoznamProduktov = new ProductsDao();
 	//private User zakaznik ; 
 	
+	public void inic(){
+		//zoznamUzivatelov.pridajUzivatela(new User(1, "admin", "admin", true, "admin", "pass"));
+		//zoznamUzivatelov.pridajUzivatela(new User(2, "user", "user", false, "user", "pass"));
+		//zoznamUzivatelov.loadtUsersJDBC();
+		//zoznamObjednavok.pridajObjednavku(new Order(1, ProductsDao.zoznamProduktov, user , false));
+		//zoznamObjednavok.insertOrderJDBC(1, ProductsDao.zoznamProduktov, false, user);
+		zoznamObjednavok.loadOrdersJDBC();
+	}
+	
 	public void pridajOb(User loged) {
 	
 		List <Product> objednane = new ArrayList<Product>();		
@@ -28,6 +37,7 @@ public class OrderControler {
 		}
 		Order nova = new Order(zoznamObjednavok.sizeOrders()+1, objednane, loged, false);
 		zoznamObjednavok.pridajObjednavku(nova);
+		zoznamObjednavok.insertOrderJDBC(nova.getCisloObjednavky(), nova.getZoznamProduktov(),false , nova.getZakaznik());
 	}
 	public String  listOrders(){
 		return zoznamObjednavok.toString();

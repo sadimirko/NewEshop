@@ -14,6 +14,7 @@ public class MenuControler {
 
 	public void run() {
 		String znak = new String();
+		orders.inic();
 		if (loged.isAdmin())
 			menuAdmin();
 		else
@@ -22,6 +23,7 @@ public class MenuControler {
 		while (!znak.equals("0")) {
 			System.out.println("************************************************");
 			System.out.println("Press number from menu!");
+			
 			znak = sc.next();
 			switch (znak) {
 			case "1":
@@ -58,6 +60,7 @@ public class MenuControler {
 			case "5":
 				if (loged.isAdmin()) {
 					System.out.println("Press 5 - Add order");
+					orders.pridajOb(loged);
 				} else {
 					System.out.println("Press 5 - Delete order");
 					orders.deleteOrder();
@@ -145,6 +148,7 @@ public class MenuControler {
 		String pass = sc.next();
 		User neww = new User(users.returnSizeUsers() + 1, name, lastname, false, login, pass);
 		users.addUser(neww);
+		
 	
 		loged = neww;
 		System.out.println("User: "+loged.getLogin()+" was log in...");

@@ -49,7 +49,7 @@ public class ProductsDao {
 			conn = DriverManager.getConnection(CONNECT);
 			stmt = conn.createStatement();
 			String sql = "INSERT INTO product (id, name, description, price)" +
-			"VALUES ('" + id + "','" + name + "','" + description + "'," + price + "')";
+			"VALUES ('" + id + "','" + name + "','" + description + "','" + price + "')";
 			stmt.executeUpdate(sql);
 
 		} catch (SQLException se) {
@@ -246,7 +246,7 @@ public class ProductsDao {
 			stmt = conn.createStatement();
 			for (Product product : zoznamProduktov) {
 			String sql = "INSERT INTO product (id,name, description, price)" +
-			"VALUES ('" + product.getCisloProduktu() + "','" + product.getNazov() + "','" + product.getPopis() + "'," + product.getCena() 
+			"VALUES ('" + product.getCisloProduktu() + "','" + product.getNazov() + "','" + product.getPopis() + "','" + product.getCena() 
 			+ "')";
 			stmt.executeUpdate(sql);
 			}

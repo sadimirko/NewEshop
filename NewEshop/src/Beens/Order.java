@@ -1,8 +1,11 @@
 package Beens;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Order {
+public class Order implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	private int cisloObjednavky;
 	private List<Product> zoznamProduktov = new ArrayList<>();
 	private double celkovaCena;

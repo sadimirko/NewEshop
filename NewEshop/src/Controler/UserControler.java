@@ -11,8 +11,9 @@ public class UserControler {
 	
 	
 	public void inic(){
-		zoznamUzivatelov.pridajUzivatela(new User(1, "admin", "admin", true, "admin", "pass"));
-		zoznamUzivatelov.pridajUzivatela(new User(2, "user", "user", false, "user", "pass"));
+		//zoznamUzivatelov.pridajUzivatela(new User(1, "admin", "admin", true, "admin", "pass"));
+		//zoznamUzivatelov.pridajUzivatela(new User(2, "user", "user", false, "user", "pass"));
+		zoznamUzivatelov.loadtUsersJDBC();
 	}
 	
 	@Override
@@ -20,15 +21,18 @@ public class UserControler {
 		return "Users [" + zoznamUzivatelov + "]";
 	}
 	
-	public void addUser(User uzivatel){
-		zoznamUzivatelov.pridajUzivatela(uzivatel);
+	public void addUser(User user){
+		zoznamUzivatelov.pridajUzivatela(user);
+		zoznamUzivatelov.insertUserJDBC(user.getCisloUzivatela(), user.getMeno(), user.getPriezvisko(), user.isAdmin(), user.getLogin(), user.getHeslo());
 	}
 	
 	public void deleteUser(int index){
 		zoznamUzivatelov.zmazUzivatela(index);
+		zoznamUzivatelov.deletetUserJDBC(index);
 	}
 	public void deleteUser(User user){
 		zoznamUzivatelov.zmazUzivatela(user);
+		zoznamUzivatelov.deletetUserJDBC(user.getCisloUzivatela());
 	}
 		
 	public String listUsers(){
@@ -60,12 +64,13 @@ public class UserControler {
 		String pass = sc.next();
 		User neww = new User(returnSizeUsers() + 1, name, lastname, false, login, pass);
 		addUser(neww);
-		System.out.println("User added ...");
 		zoznamUzivatelov.insertUserJDBC(returnSizeUsers() + 1,name, lastname, false, login, pass);
+		System.out.println("User added ...");
+		
 	}
 	
 	public void setAdmin(){
-		System.out.println("***  Select number of new Admin  ***");
+		System.out.println("***  Select number for new Admin  ***");
 		listUsers();
 		int i = sc.nextInt();
 		zoznamUzivatelov.setAdmin(i);

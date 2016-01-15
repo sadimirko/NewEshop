@@ -156,6 +156,40 @@ public class UsersDao {
 		System.out.println("Delete OK");
 	}
 	
+	public void updateAdminJDBC(int i){
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+
+			Class.forName(DRIVER);
+			conn = DriverManager.getConnection(CONNECT);
+			stmt = conn.createStatement();
+			String sql = "Update user SET admin='1' WHERE user.id='"+i+"'";
+			stmt.executeUpdate(sql);
+
+		} catch (SQLException se) {
+			// Handle errors for JDBC
+			se.printStackTrace();
+		} catch (Exception e) {
+			// Handle errors for Class.forName
+			e.printStackTrace();
+		} finally {
+			// finally block used to close resources
+			try {
+				if (stmt != null)
+					conn.close();
+			} catch (SQLException se) {
+			}
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		System.out.println("Update OK");
+	}
+	
 	public String listUserJDBC(int i,String log)  {
 		Connection conn = null;
 		Statement stmt = null;
@@ -306,7 +340,7 @@ public class UsersDao {
 				boolean admin;
 				if (a == 1) admin = true; else admin = false; 
 				String login = rs.getString("login");
-				String pass = rs.getString("passwrd");
+				String pass = rs.getString("password");
 				User u = new User(id, name, lastname, admin, login, pass);
 				zoznamUzivatelov.add(u);
 			}
